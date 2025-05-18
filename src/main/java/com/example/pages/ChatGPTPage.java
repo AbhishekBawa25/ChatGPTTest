@@ -14,12 +14,12 @@ public class ChatGPTPage {
 
     // Locators
     private final By closeButton = By.xpath("//button[@data-testid='close-button' and @aria-label='Close']");
-    private final By loginButton = By.xpath("//button[@data-testid='login-button']");
+    private final By loginButton = By.xpath("//button[@data-testid='login-button']"); 
     private final By newChatButton = By.xpath("//*[@id='page-header']/div[2]/div/span/a");
-    private final By clearChatButton = By.xpath("//button[contains(@class, 'btn-danger')]");
+    private final By clearChatButton = By.xpath("//button[@class='btn relative btn-primary btn-giant mb-3']");
     private final By inputBox = By.xpath("//div[@id='prompt-textarea']");
     private final By sendButton = By.xpath("//button[@id='composer-submit-button']");
-    private final By signUpButton = By.xpath("//*[@id='conversation-header-actions']/div/button[2]");
+    private final By signUpButton = By.xpath("//*[@id='conversation-header-actions']/div/button[2]");  
     private final By chatResponse = By.xpath("//div[contains(@class, 'response-message')]");
 
     public ChatGPTPage(WebDriver driver, WebDriverWait wait) {
@@ -37,10 +37,12 @@ public class ChatGPTPage {
         }
     }
 
-    public void clickLoginButton() {
+    public void clickLoginButton() throws InterruptedException {
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(loginButton));
         button.click();
         System.out.println("Login button clicked.");
+        Thread.sleep(2000);
+        driver.get("https://chat.openai.com");
     }
 
     public void clickNewChatButton() {
@@ -72,22 +74,10 @@ public class ChatGPTPage {
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(signUpButton));
         button.click();
         System.out.println("Sign Up button clicked.");
+        driver.navigate().back();
     }
 
-    public boolean isChatCleared() {
-        try {
-            return wait.until(ExpectedConditions.invisibilityOfElementLocated(chatResponse));
-        } catch (Exception e) {
-            return true; // No messages found, chat is cleared
-        }
-    }
 
-    public boolean isMessageSent() {
-        try {
-            WebElement response = wait.until(ExpectedConditions.presenceOfElementLocated(chatResponse));
-            return response.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
+
+    
 }

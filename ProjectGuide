@@ -1,0 +1,29 @@
+Configure Jenkins
+
+Now, set up a Jenkins pipeline job to poll the Git repository and run the pipeline defined in the Jenkinsfile.
+
+Log in to Jenkins:
+Open Jenkins in your browser (e.g., http://localhost:8080).
+Log in with your credentials.
+Create a New Pipeline Job:
+Click New Item in the Jenkins dashboard.
+Enter a name (e.g., Selenium-Grid-Tests).
+Select Pipeline as the project type, then click OK.
+Configure the Pipeline:
+In the job configuration page:
+General:
+Optionally, add a description like “Run Selenium tests on code push”.
+Build Triggers:
+Check Poll SCM.
+Enter a schedule in the format * * * * * (this polls every minute). For less frequent polling, use:
+H/5 * * * * (every 5 minutes).
+H * * * * (every hour).
+Leave the webhook option unchecked, as you specified not to use webhooks.
+Pipeline:
+Set Definition to Pipeline script from SCM.
+Set SCM to Git.
+In Repository URL, enter your Git repository URL (e.g., https://github.com/your-username/your-repo.git).
+If your repository is private, click Add under Credentials to add your Git username/password or SSH key.
+Set Branch Specifier to */main (or your branch name, e.g., */master).
+Set Script Path to Jenkinsfile (the path to your Jenkinsfile in the repository).
+Click Save.
