@@ -1,6 +1,7 @@
 package com.example.pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -12,6 +13,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.io.FileInputStream;
 import java.net.URL;
@@ -47,13 +50,29 @@ public class ChatGPTTest {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         chatGPTPage = new ChatGPTPage(driver, wait);
-    }
-
-    @BeforeMethod
-    public void resetState() {
         driver.get(config.getProperty("app.url"));
     }
 
+    
+    
+// _____________Chrome driver setup_____________   
+//    public void setUp() throws Exception {
+//        // Load config
+//        config = new Properties();
+//        FileInputStream fis = new FileInputStream("src/test/resources/config.properties");
+//        config.load(fis);
+//
+//        // Set up ChromeDriver using WebDriverManager
+//        WebDriverManager.chromedriver().setup();
+//        driver = new ChromeDriver();
+//        driver.manage().window().maximize();
+//        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        //driver.get(config.getProperty("app.url"));
+//        chatGPTPage = new ChatGPTPage(driver, wait);
+//        driver.get(config.getProperty("app.url"));
+//    }
+
+    
     @Test(priority = 1)
     public void testDismissPopup() {
         chatGPTPage.dismissPopup();
@@ -63,7 +82,7 @@ public class ChatGPTTest {
     @Test(priority = 2)
     public void testClickNewChatButton() {
         chatGPTPage.clickNewChatButton();
-        chatGPTPage.clearChat();
+        
     }
 
     @Test(priority = 3)

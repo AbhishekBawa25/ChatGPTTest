@@ -5,14 +5,11 @@
     <classes>
       <class name="com.example.pages.ChatGPTTest">
         <methods>
-          <include name="setUp"/>
           <include name="testEnterTextAndSend"/>
-          <include name="testDismissPopup"/>
+          <include name="setUp"/>
           <include name="tearDown"/>
           <include name="testClickNewChatButton"/>
-          <include name="testClickLoginButton"/>
           <include name="testClickSignUpButton"/>
-          <include name="resetState"/>
         </methods>
       </class> <!-- com.example.pages.ChatGPTTest -->
     </classes>
